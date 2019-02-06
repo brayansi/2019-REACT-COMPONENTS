@@ -1,4 +1,4 @@
-const api = 'http://localhost:3002/api/react-video/';
+const api = 'http://localhost:3002/api/';
 
 export const ApiService = {
     get(endPoint) {

@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
+import { channel } from './../services/EventService';
 
-export default function VideoList() {
+export default function VideoList(props) {
+
+    const { videos } = props || [];
+
+    function handleClick(video) {
+        channel.emit('video:select', video)
+    }
+
     return (
         <ul className="video-list">
-            <li className="video">
-                <img src="https://storage.googleapis.com/coverr-public/thumbnails/Cross_frame.jpg" />
-                <div>Crooss Frame</div>
-            </li>
-            <li className="video">
-                <img src="https://storage.googleapis.com/coverr-public/thumbnails/Cross_frame.jpg" />
-                <div>Crooss Frame</div>
-            </li>
-            <li className="video">
-                <img src="https://storage.googleapis.com/coverr-public/thumbnails/Cross_frame.jpg" />
-                <div>Crooss Frame</div>
-            </li>
-            <li className="video">
-                <img src="https://storage.googleapis.com/coverr-public/thumbnails/Cross_frame.jpg" />
-                <div>Crooss Frame</div>
-            </li>
+            {videos.map(video =>
+                <li key={video.id} className="video" onClick={handleClick.bind(this, video)}>
+                    <img src={video.image} />
+                    <div>{video.name}</div>
+                </li>
+            )
+            }
+
         </ul>
     )
 }
